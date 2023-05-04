@@ -1,6 +1,5 @@
 import os
 import notional
-from notional.text import markdown
 
 def str_fix(rich_text_obj_arr):
   final_str = ""

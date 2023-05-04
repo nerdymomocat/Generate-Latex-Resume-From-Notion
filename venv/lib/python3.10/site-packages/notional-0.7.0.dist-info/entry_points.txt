@@ -1,0 +1,6 @@
+[console_scripts]
+cleanup=devtools:cleanup
+mkdocs=devtools:mkdocs
+preflight=devtools:preflight
+utest=devtools:run_unit_tests
+

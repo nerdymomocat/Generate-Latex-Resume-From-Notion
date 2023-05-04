@@ -54,6 +54,7 @@ for data in query.execute():
   resume_settings_database_single["Section Format"] = str(
     data["Section Format"])
   resume_settings_database_single["Sort By"] = str(data["Sort By"])
+  resume_settings_database_single["Sort Direction"] = str(data["Sort Direction"])
   resume_settings_database_single["id"] = str(data.id)
   resume_settings_database_map[str(data.id)] = int(data["Rank"]) - 1
   resume_settings_database_single["Items"] = []
@@ -107,6 +108,7 @@ for section in resume_settings_database:
 
   #print(section["Name"], len(section["Items"]))
   if section["Sort By"] != "":
+    if section["Sort Direction"]
     section["Items"] = sorted(
       section["Items"],
       key=lambda x: sort_by_date(x["NP:Time"], section["Sort By"]),

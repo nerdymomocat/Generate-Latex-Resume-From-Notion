@@ -1,5 +1,8 @@
 import os
 import notional
+from dateutil import parser
+from datetime import datetime
+
 
 def str_fix(rich_text_obj_arr):
   final_str = ""
@@ -14,6 +17,27 @@ def str_fix(rich_text_obj_arr):
 
     final_str += ptext
   return final_str
+
+
+def sort_by_date(year_string, part):
+
+  using_str = year_string
+  if using_str == "":
+    using_str = "Jan 1900"
+  if "present" in using_str:
+    now = datetime.now()
+    month_name = now.strftime("%B")
+    year_text = now.strftime("%Y")
+    using_str = using_str.replace("present",
+                                  str(month_name) + " " + str(year_text))
+
+  if "-" in using_str:
+    split_string = using_str.split("-")
+    if "Start" in part:
+      using_str = split_string[0].strip()
+    else:
+      using_str = split_string[1].strip()
+  return parser.parse(using_str)
 
 
 auth_tokenD = os.getenv("notion_integration_key")
@@ -82,6 +106,10 @@ for section in resume_settings_database:
   final_latex += text_start + "\n"
 
   #print(section["Name"], len(section["Items"]))
+  if section["Sort By"] != "":
+    section["Items"] = sorted(
+      section["Items"],
+      key=lambda x: sort_by_date(x["NP:Time"], section["Sort By"]))
 
   for item in section["Items"]:
     item_str = section["Item Format"]

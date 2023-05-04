@@ -71,8 +71,6 @@ for data in query.execute():
   resume_database_single["NP:Name"] = str(data["Name"])
   resume_database_single["NP:URL"] = str(data["URL"])
   resume_database_single["NP:People"] = str_fix(data["People"].rich_text)
-  # properties={'People': RichText(type='rich_text', id='%3DiQi', rich_text=[TextObject(type='text', plain_text='Jack Milton', href='https://jackbox.tv/', annotations=Annotations(bold=False, italic=False, strikethrough=False, underline=False, code=False, color=<FullColor.DEFAULT: 'default'>), text=_NestedData(content='Jack Milton', link=LinkObject(type='url', url='https://jackbox.tv/')))]),
-  #print(data)
   resume_database_single["NP:Organization"] = str_fix(
     data["Organization"].rich_text)
   resume_database_single["NP:Time"] = str(data["Time"])
@@ -109,7 +107,8 @@ for section in resume_settings_database:
   if section["Sort By"] != "":
     section["Items"] = sorted(
       section["Items"],
-      key=lambda x: sort_by_date(x["NP:Time"], section["Sort By"]))
+      key=lambda x: sort_by_date(x["NP:Time"], section["Sort By"]),
+      reverse=True)
 
   for item in section["Items"]:
     item_str = section["Item Format"]

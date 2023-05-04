@@ -90,6 +90,8 @@ for data in query.execute():
 final_latex = ""
 
 for section in resume_settings_database:
+  if section["Items"] == "":
+    continue
   text_start = ""
   if section["Name"] != "Name":
     text_start = "\section{" + section["Name"] + "}\n"

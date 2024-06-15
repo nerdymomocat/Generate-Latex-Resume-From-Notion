@@ -80,11 +80,10 @@ for data in query.execute():
   resume_database_single["NP:Status"] = str(data["Status"])
   resume_database_single["NP:Geographic Location"] = str(
     data["Geographic Location"])
-  resume_database_single["NP:MEOW| Resume Database Formatting"] = str(
-    data["MEOW| Resume Database Formatting"].relation[0].id)
+  resume_database_single["NP:Resume Database Formatting"] = str(
+    data["Resume Database Formatting"].relation[0].id)
   resume_settings_database[resume_settings_database_map[resume_database_single[
-    "NP:MEOW| Resume Database Formatting"]]]["Items"].append(
-      resume_database_single)
+    "NP:Resume Database Formatting"]]]["Items"].append(resume_database_single)
   resume_database.append(resume_database_single)
 
 #print(resume_settings_database)

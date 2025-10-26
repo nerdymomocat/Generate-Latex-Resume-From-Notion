@@ -1,0 +1,17 @@
+# .github/workflows/test-download.yml
+name: Test Bib Download
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Test wget download
+        run: |
+          wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1Bm-71XPre632dRDtp3GE8Wf1j1sAC-2s" -O mycollection.bib
+          ls -l mycollection.bib
